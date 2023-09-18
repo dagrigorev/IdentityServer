@@ -1,16 +1,16 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
+// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using System;
-using System.Threading.Tasks;
-using IdentityServer4.Services;
-using System.Linq;
 using IdentityServer4.EntityFramework.Interfaces;
-using Microsoft.Extensions.Logging;
+using IdentityServer4.Services;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace IdentityServer4.EntityFramework.Services
 {
@@ -50,10 +50,10 @@ namespace IdentityServer4.EntityFramework.Services
             var query = from o in dbContext.ClientCorsOrigins
                         where o.Origin == origin
                         select o;
-            
+
             var isAllowed = await query.AnyAsync();
 
-            _logger.LogDebug("Origin {origin} is allowed: {originAllowed}", origin, isAllowed);
+            _logger.LogDebug("Origin {origin} is allowed: {originAllowed}", origin?.Replace(Environment.NewLine, ""), isAllowed);
 
             return isAllowed;
         }
