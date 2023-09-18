@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        runs-on: [macOS-latest, ubuntu-latest, windows-latest]
+        runs-on: [windows-latest]
     name: ${{ matrix.runs-on }}
     runs-on: ${{ matrix.runs-on }}
     steps:
@@ -28,4 +28,3 @@ jobs:
       run: ./build.sh
     - if: matrix.runs-on == 'windows-latest' && github.ref != 'refs/heads/main' && !contains(github.ref, 'refs/tags/')
       run: ./build.ps1
-    - if: (matrix.runs-on == 'windows-latest') && (github.ref == 'refs/heads/main' || contains(github.ref, 'refs/tags/'))
